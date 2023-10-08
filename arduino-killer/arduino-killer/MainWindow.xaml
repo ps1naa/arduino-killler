@@ -1,0 +1,100 @@
+﻿<Window x:Class="arduino.MainWindow "
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:arduino"
+        mc:Ignorable="d"
+        Title="UsbKiller" Height="600" Width="800">
+        <Window.Resources>
+        <Style TargetType="ComboBox">
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Background" Value="LightBlue" />
+            <Setter Property="BorderBrush" Value="#E0E0E0"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+            
+        <Style TargetType="Window">
+            <Setter Property="Background" Value="Gray" />
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Background" Value="#3498DB"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="Margin" Value="10"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+                
+        </Grid.RowDefinitions>
+        <Image Grid.RowSpan="8" Source="https://www.meme-arsenal.com/memes/0a4d374343f3ce1acd35faaa2d6c275f.jpg" Stretch="Fill" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"> 
+            <Image.Opacity>0.15</Image.Opacity>
+        </Image>
+        <!-- Лого -->
+        <TextBlock Grid.Row="2" TextWrapping="Wrap" TextAlignment="Center" Width="400" HorizontalAlignment="Center" Margin="50,10,0,10"  FontSize="55px" FontWeight="Bold" FontStyle="Italic"  > Arduino uploading App </TextBlock>
+        
+        <!-- Выбор COM-порта -->
+        <Border BorderBrush="Black" BorderThickness="1" Margin="50,60,0,10" Grid.Row="3" Width="400">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+        
+                <Label Content="Выберите COM-порт:" Width="150" VerticalAlignment="Center"/>
+        
+                <ComboBox x:Name="comboBoxPorts" Grid.Column="1" VerticalAlignment="Top" SelectionChanged="ComboBoxPorts_SelectionChanged"/>
+            </Grid>
+        </Border>
+
+        
+        <!-- Выбор пресета -->
+        <Border BorderBrush="Black" BorderThickness="1" Margin="50,10,0,10" Grid.Row="4" Width="400">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+        
+                <Label Content="Выберите пресет:" Width="150" VerticalAlignment="Center"/>
+        
+                <ComboBox x:Name="comboBoxPresets" Grid.Column="1" VerticalAlignment="Top" SelectionChanged="ComboBoxPresets_SelectionChanged"/>
+            </Grid>
+        </Border>
+
+        
+        <!-- Кнопка загрузки пресета -->
+        <Button Content="Загрузить пресет" Grid.Row="5" Margin="0,10,200,10" VerticalAlignment="Top" Width="150" Click="LoadPresetButton_Click" />
+        
+        <!-- Кнопка загрузки своего скетча -->
+        <Button Content="Загрузить свой пресет" Grid.Row="5" Margin="250,10,0,10" VerticalAlignment="Top" Width="200" Click="LoadCustomPresetButton_Click" />
+        
+        <TextBlock x:Name="statusBlock" Grid.Row="1"></TextBlock>
+        
+        <!-- Элемент отображения статуса -->
+        <StatusBar Grid.Row="7">
+            <StatusBarItem>
+                <TextBlock x:Name="statusText" Text="Готово"/>
+            </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Right">
+                <TextBlock x:Name="arduinoStatus" Text="Arduino: Нет подключения"/>
+            </StatusBarItem>
+        </StatusBar>
+        
+    </Grid>
+</Window>
